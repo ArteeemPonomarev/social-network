@@ -1,0 +1,15 @@
+.Friends { 
+    
+    display:grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: center;
+}
+.position {
+    margin-top: 100px;
+    padding-bottom:30px;
+    grid-column: span 3;
+    color:white;
+  
+}

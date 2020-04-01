@@ -1,0 +1,10 @@
+.image{
+    max-width: 50px;
+    border-radius: 50%;
+}
+.name {
+    color: white;
+}
+.friendItem{
+    margin-left: 10px;
+}
