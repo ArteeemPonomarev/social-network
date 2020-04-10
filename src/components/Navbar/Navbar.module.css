@@ -6,11 +6,18 @@
   }
 
   .item a{
+      font-size: 18px;
       color:white;
       text-decoration: none;
-      
   }
 
   .item a.activeLink{
-      color:gold;
+      color:rgb(252, 243, 197);
+      font-size:22px;
+  }
+  li {
+      margin-bottom: 15px;
+  }
+  ul {
+      list-style:none;
   }

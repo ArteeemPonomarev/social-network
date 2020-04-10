@@ -11,7 +11,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className =  {s.Info} >
                
-                ava + discription
+                ava + discription(about myself)
             </div>
         </div>
 

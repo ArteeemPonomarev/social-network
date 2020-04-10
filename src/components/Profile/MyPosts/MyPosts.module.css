@@ -4,4 +4,17 @@
   .myPostWrapp {
     padding:20px;
   }
+  .posts {
+    text-align: center;
+    padding: 20px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .newPost {
+    padding-left: 30px;
+    padding-bottom: 10px;
+  }
+  .buttons{
+    margin-bottom:30px; 
+  }
   
