@@ -1,6 +1,9 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+const SEND_MESSAGE = 'SEND-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
 let store = {
     _state: {
         profilePage: {
@@ -27,7 +30,7 @@ let store = {
             { id: 5, message: 'heeeey' }
             ],
 
-            newMessage: 'Enter your message',
+            newMessage: '',
         },
 
         sidebar: {
@@ -62,7 +65,7 @@ let store = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === 'SEND-MESSAGE') {
             let newMessage = {
                 id: 6,
                 message: this._state.dialogsPage.newMessage,
@@ -70,8 +73,8 @@ let store = {
             this._state.dialogsPage.messagesData.push(newMessage);
             this._state.dialogsPage.newMessage = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-POST') {
-            this._state.dialogsPage.newMessage = action.newText;
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessage = action.newMessage;
             this._callSubscriber(this._state);
         }
      },
@@ -80,10 +83,16 @@ let store = {
 }//action is the OBJECT!!! у action есть обязательное поле {type: 'ADD-POST'}
 
 
-export const addPostActionCreator = () => ({type: ADD_POST})
+export const addPostActionCreator = () => ({type: ADD_POST});
   
 export const updateNewPostTextCreator = (text) => {
     return {type: UPDATE_NEW_POST_TEXT, newText: text }
   }
+
+export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
+
+export const newMessageActionCreator = (text) => {
+    return {type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text}
+}
 export default store;
 window.store = store;
