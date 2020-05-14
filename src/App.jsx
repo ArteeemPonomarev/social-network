@@ -16,17 +16,15 @@ const App = (props) => {
     <HashRouter>
       <div className='app-wrapper'>
         <Header />
-        <Navbar sidebar={props.state.sidebar} />
+        <Navbar />
         <div className='content'>
 
           <Route path='/profile'
-                                 render={() => <Profile store={props.store} />}>
+                                 render={() => <Profile />}>
           </Route>
 
           <Route path='/dialogs' 
-                                render={() => <DialogsContainer store={props.store}
-                                    state={props.state.dialogsPage}
-                                                       dispatch = {props.dispatch} />}>
+                                render={() => <DialogsContainer />}>
           </Route>
 
           <Route path='/news' render={() => <News />}></Route>

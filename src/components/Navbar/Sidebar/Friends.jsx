@@ -4,15 +4,16 @@ import s from './Friends.module.css';
 
 
 const Friends = (props) => {
+    let friends = props.info.map(fr => <Friend info={fr.name} src={fr.src}/>);
 
-let friends = props.info.map( fr => <Friend info = {fr.name} src = {fr.src}/>);
-
-    return( <div className = {s.Friends}>
-            <div className = {s.position} >Friends</div>
+    return (
+        <div className={s.Friends}>
+            <div className={s.position}>
+                Friends
+            </div>
             {friends}
-           </div>
+        </div>
     );
-
 }
 
 export default Friends;
