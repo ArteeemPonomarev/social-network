@@ -13,7 +13,7 @@ const Dialogs = (props) => {
 // передаем в props только dispatch, а не весь store целиком, т. к. нужно передавать компоненте только ее данные
 
   let onSendMessageClick = () => {
-    props.SendMessage();
+    props.sendMessage();
   }
 
   let onMessageChange = (event) => {
