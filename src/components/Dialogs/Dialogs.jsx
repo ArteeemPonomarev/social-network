@@ -6,9 +6,12 @@ import Message from './Message/Message';
 
 const Dialogs = (props) => {
 
-  let dialogElements = props.dialogsPage.dialogsData.map(d => <DialogItem name={d.name} id={d.id} />);
+  let dialogElements = props.dialogsPage.dialogsData.map(d => <DialogItem name={d.name}
+                                                                          id={d.id}
+                                                                          key={d.id} />);
 
-  let messageElement = props.dialogsPage.messagesData.map(m => <Message message={m.message} />);
+  let messageElement = props.dialogsPage.messagesData.map(m => <Message message={m.message}
+                                                                        key={m.id} />);
 
 // передаем в props только dispatch, а не весь store целиком, т. к. нужно передавать компоненте только ее данные
 
