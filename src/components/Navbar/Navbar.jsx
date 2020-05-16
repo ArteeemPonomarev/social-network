@@ -35,7 +35,7 @@ const Navbar = () => {
             </ul>
 
             <div>
-                {/*<FriendsContainer/>*/}
+                <FriendsContainer />
             </div>
         </nav>
     );

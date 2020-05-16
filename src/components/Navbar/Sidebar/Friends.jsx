@@ -4,7 +4,7 @@ import s from './Friends.module.css';
 
 
 const Friends = (props) => {
-    let friends = props.info.map(fr => <Friend info={fr.name} src={fr.src}/>);
+    let friends = props.friends.map(fr => <Friend info={fr.name} src={fr.src}/>);
 
     return (
         <div className={s.Friends}>
