@@ -4,9 +4,9 @@ import userIcon from "../../assets/images/user_icon.png";
 
 let Users = (props) => {
 
-    //let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
-    let pagesCount = 2;
+
 
     let pages = [];
 
