@@ -17,7 +17,7 @@ const ProfileInfo = (props) => {
             <div className =  {s.Info} >
                <img src = {props.profile.photos.small} />
                 ava + discription(about myself)
-                <ProfileStatus status={'I learn React'}/>
+                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
             </div>
         </div>
 
