@@ -17,7 +17,6 @@ import Login from "./components/Login/Login";
 const App = (props) => {
     return (
         <div className='app-wrapper'>
-
             <HeaderContainer/>
             <Navbar/>
             <div className='content'>
