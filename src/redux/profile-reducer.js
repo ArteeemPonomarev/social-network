@@ -11,7 +11,6 @@ let initialSate = {
     { id: 3, post: 'How are you, my friends?', likes: 132 },
     { id: 4, post: 'I like learn React', likes: 2899 },
     { id: 5, post: 'heeeey', likes: 720 }],
-    newPostText: '',
     profile: null,
     status: ''
 };
@@ -22,13 +21,12 @@ const profileReducer = (state = initialSate, action) => {
         case ADD_POST: {
             let newPost = {
                 id: 6,
-                post: state.newPostText,
+                post: action.newPostMessage,
                 likes: 0
             };
             return {
                 ...state,
                 postsData: [ ...state.postsData, newPost],
-                newPostText: ''
             };
         }
         case UPDATE_NEW_POST_TEXT: {
@@ -52,7 +50,7 @@ const profileReducer = (state = initialSate, action) => {
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = (newPostMessage) => ({type: ADD_POST, newPostMessage});
 export const updateNewPostTextCreator = (text) => {
     return {type: UPDATE_NEW_POST_TEXT, newText: text }
 }

@@ -1,48 +1,48 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import {Field, reduxForm} from "redux-form";
 
 const MyPosts = (props) => {
 
-  let postsElement = props.profilePage.postsData.map(p => <Post message={p.post} likesCounter={p.likes} />);
+    let postsElement = props.profilePage.postsData.map(p => <Post message={p.post} likesCounter={p.likes}/>);
 
-  let onAddPost = () => {
-    props.addPost();
-    //2/props.dispatch({type:'ADD-POST'})
-    //props.dispatch(addPostActionCreator());
-  };
 
-  let onPostChange = (e) => {
-    let text = e.target.value;
-    props.updateNewPostText(text);
-    //2.props.dispatch({type:'UPDATE-NEW-POST-TEXT', newText: text})
-    //let action = updateNewPostTextCreator(text);
-   // props.dispatch(action);
-  };
+    let sendNewPost = (values) => {
+        props.addPost(values.addNewPost)
+    }
 
-  return (
-
-    <div className={s.myPostWrapp}>
-      <div className = {s.posts}>
-        My posts
+    return (
+        <div className={s.myPostWrapp}>
+            <div className={s.posts}>
+                My posts
+            </div>
+            <div className={s.newPost}>
+                New posts
+            </div>
+            <AddNewPostRedux onSubmit={sendNewPost}/>
+            {postsElement}
+            <div className={s.item}>
+                Post 2
+            </div>
         </div>
-      <div className = {s.newPost}> 
-        New posts
-        </div>
-      <div>
-        <textarea onChange={onPostChange} value={props.newPostText} placeholder = "Enter your message"/>
-      </div>
-      <div className = {s.buttons}>
-        <button onClick={onAddPost}>Add post</button>
-        <button>Remove</button>
-      </div>
-      
-      {postsElement}
-      <div className={s.item}>
-        Post 2
-        </div>
-    </div>
-  );
+    );
 }
+
+const AddNewPost = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component={'textarea'} name={'addNewPost'} placeholder={'Enter your message'}/>
+            </div>
+            <div className={s.buttons}>
+                <button>Add post</button>
+                <button>Remove</button>
+            </div>
+        </form>
+    )
+}
+
+const AddNewPostRedux = reduxForm({form: 'addNewPost'})(AddNewPost)
 
 export default MyPosts;
