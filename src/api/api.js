@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import axios from "axios";
 
 
 const instance = axios.create({
@@ -50,8 +50,12 @@ export const authAPI = {
         return instance.get('auth/me')
             .then(response => response.data)
     },
-    logIn() {
-        return instance.post(`auth/login`)
+    logIn(email, password, rememberMe = false) {
+        return instance.post(`auth/login`,{email, password, rememberMe})
+            .then(response => response.data)
+    },
+    logout() {
+        return instance.delete(`auth/login`)
             .then(response => response.data)
     }
 }
