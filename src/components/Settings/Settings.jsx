@@ -1,4 +1,5 @@
 import React from 'react';
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 const Settings = (props) => {
     return(
@@ -8,4 +9,4 @@ const Settings = (props) => {
     );
 }
 
-export default Settings;
+export default withAuthRedirect(Settings);
