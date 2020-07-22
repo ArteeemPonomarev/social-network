@@ -8,12 +8,18 @@ let initialSate = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    fake: 10
 };
 
 const authReducer = (state = initialSate, action) => {
 
     switch (action.type) {
+        case 'FAKE':
+            return {
+                ...state,
+                fake: state.fake + 1
+            }
         case SET_USER_DATA:
             return {
                 ...state,
