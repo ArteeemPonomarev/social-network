@@ -5,9 +5,8 @@ import {BrowserRouter, Route, withRouter} from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+//import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileInfo/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -16,7 +15,12 @@ import {compose} from "redux";
 import {initializedApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
+import {withSuspense} from "./hoc/withSuspense";
 
+//import DialogsContainer from "./components/Dialogs/DialogsContainer"
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+//import ProfileContainer from "./components/Profile/ProfileInfo/ProfileContainer";
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileInfo/ProfileContainer"))
 
 class App extends React.Component {
     componentDidMount() {
@@ -33,10 +37,10 @@ class App extends React.Component {
                 <Navbar/>
                 <div className='content'>
                     <Route path='/profile/:userId?'
-                           render={() => <ProfileContainer/>}>
+                           render={withSuspense(ProfileContainer)}>
                     </Route>
                     <Route path='/dialogs'
-                           render={() => <DialogsContainer/>}>
+                           render= {withSuspense(DialogsContainer)}>
                     </Route>
                     <Route path='/users'
                            render={() => <UsersContainer/>}>
@@ -59,7 +63,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const AppContainer =  compose(withRouter,connect(mapStateToProps, {initializedApp, getAuthUserData}))(App);
+const AppContainer = compose(withRouter, connect(mapStateToProps, {initializedApp, getAuthUserData}))(App);
 
 const SocialNetApp = (props) => {
     return (
