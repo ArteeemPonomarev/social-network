@@ -6,14 +6,11 @@ import './index.css';
 import App from './App';
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
+import SocialNetApp from "./App";
 
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <App/>,
-        </Provider>
-    </BrowserRouter>, document.getElementById('root'));
+    <SocialNetApp/>, document.getElementById('root'));
 
 
 // ReactDOM.render(<App state={state} addPost = {addPost} />, document.getElementById('root'));

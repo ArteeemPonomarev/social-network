@@ -22,5 +22,5 @@ const reducers = combineReducers({
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
-window.store = store;
+//window.store = store;
 export default store;
