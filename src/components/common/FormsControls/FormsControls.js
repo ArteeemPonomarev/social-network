@@ -1,15 +1,16 @@
 import React from "react";
 import styles from './Formcontrols.module.css'
+import {Field} from "redux-form";
 
-const FormControl = ({input, meta, child, ...props}) => {
-    const hasError = meta.touched && meta.error
+const FormControl = ({input, meta: {touched, error}, children}) => {
+    const hasError = touched && error
     const errorClass = hasError ? styles.error : ''
     return (
         <div className={`${styles.formControl} ${errorClass}`}>
             <div>
-                {props.children}
+                {children}
             </div>
-            { hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 }
@@ -24,30 +25,12 @@ export const Input = (props) => {
     return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }
 
-// export const Textarea = ({input, meta, ...props}) => {
-//
-//     const hasError = meta.touched && meta.error
-//     const errorClass = hasError ? styles.error : ''
-//     return (
-//         <div className={`${styles.formControl} ${errorClass}`}>
-//             <div>
-//                 <textarea {...input} {...props}/>
-//             </div>
-//             { hasError && <span>{meta.error}</span>}
-//         </div>
-//     )
-// }
-
-// export const Input = ({input, meta, ...props}) => {
-//
-//     const hasError = meta.touched && meta.error
-//     const errorClass = hasError ? styles.error : ''
-//     return (
-//         <div className={`${styles.formControl} ${errorClass}`}>
-//             <div>
-//                 <input {...input} {...props}/>
-//             </div>
-//             { hasError && <span>{meta.error}</span>}
-//         </div>
-//     )
-// }
+export const createField = (placeholder, name, validators, component, props = {}, text='') => {
+    return (
+        <div>
+            <Field validate={validators} placeholder={placeholder} name={name}
+                   component={component} {...props}/>
+            {text}
+        </div>
+    )
+}
