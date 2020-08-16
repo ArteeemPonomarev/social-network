@@ -1,20 +1,26 @@
 .app-wrapper {
-  display:grid;
-  width:1200px;
-  margin:0 auto;
+  /*display:grid;*/
+  /*width:1200px;*/
+  /*margin:0 auto;*/
 
-  grid-template-areas:
-  "h h"
-  "n c";
-  grid-template-rows:60px 1fr;
-  grid-template-columns:3fr 9fr;
-  grid-gap:10px;
+  /*grid-template-areas:*/
+  /*"h h"*/
+  /*"n c";*/
+  /*grid-template-rows:60px 1fr;*/
+  /*grid-template-columns:3fr 9fr;*/
+  /*grid-gap:10px;*/
 }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
 
+}
 .content {
-  grid-area:c;
-  background-color:#FFA07A;
-
+  /*grid-area:c;*/
+  background-color: #cbc6bc;
+  width: 900px;
+margin-left: 30px;
 }
 
 

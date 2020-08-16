@@ -4,6 +4,7 @@ const ADD_POST = 'social-network/profile/ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'social-network/profile/UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE';
 const SET_STATUS = 'social-network/profile/SET_STATUS';
+const SAVE_PHOTO_SUCCESS = 'social-network/profile/SAVE_PHOTO_SUCCESS';
 
 let initialSate = {
     postsData: [{id: 1, post: 'Hello,everybody', likes: 22},
@@ -45,6 +46,8 @@ const profileReducer = (state = initialSate, action) => {
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO_SUCCESS:
+            return { ...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state;
     }
@@ -59,6 +62,7 @@ const setStatus = (status) => {
     return {type: SET_STATUS, status}
 }
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
 
 
 //thunks
@@ -79,6 +83,15 @@ export const updateUserStatus = (status) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
+}
+
+export const savePhoto = (file) => async (dispatch) => {
+    const response = await profileAPI.savePhoto(file);
+
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+
 }
 
 export default profileReducer;

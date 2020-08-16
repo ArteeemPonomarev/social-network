@@ -1,6 +1,7 @@
 
 .nav {
-    grid-area:n;
+    /*grid-area:n;*/
+    width: 200px;
     background-color:#A9A9A9;
     padding: 20px;
   }
