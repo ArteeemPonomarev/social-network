@@ -1,10 +1,12 @@
 import {profileAPI, userAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'social-network/profile/ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'social-network/profile/UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'social-network/profile/SET_USER_PROFILE';
 const SET_STATUS = 'social-network/profile/SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'social-network/profile/SAVE_PHOTO_SUCCESS';
+// const SAVE_PROFILE_SUCCESS = 'social-network/profile/SAVE_PROFILE_SUCCESS';
 
 let initialSate = {
     postsData: [{id: 1, post: 'Hello,everybody', likes: 22},
@@ -54,16 +56,13 @@ const profileReducer = (state = initialSate, action) => {
 }
 
 export const addPostActionCreator = (newPostMessage) => ({type: ADD_POST, newPostMessage});
-export const updateNewPostTextCreator = (text) => {
-    return {type: UPDATE_NEW_POST_TEXT, newText: text}
-}
-
-const setStatus = (status) => {
-    return {type: SET_STATUS, status}
-}
+const setStatus = (status) => ({type: SET_STATUS, status})
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
-
+//const saveProfileSuccess = (profile) => ({type: SAVE_PROFILE_SUCCESS, profile})
+// export const updateNewPostTextCreator = (text) => {
+//     return {type: UPDATE_NEW_POST_TEXT, newText: text}
+// }
 
 //thunks
 export const getUserProfile = (userId) => async (dispatch) => {
@@ -75,7 +74,6 @@ export const getUserStatus = (status) => async (dispatch) => {
     const response = await profileAPI.getStatus(status)
     dispatch(setStatus(response.data))
 }
-
 
 export const updateUserStatus = (status) => async (dispatch) => {
     const response = await profileAPI.updateStatus(status)
@@ -91,7 +89,20 @@ export const savePhoto = (file) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
+}
 
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    debugger
+    const userId = getState().auth.userId;
+    const response = await profileAPI.saveProfile(profile);
+
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId));
+    } else {
+        dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0] }));
+        return Promise.reject(response.data.messages[0]);
+    }
 }
 
 export default profileReducer;
